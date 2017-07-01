@@ -4,7 +4,7 @@ Vue.directive('square', {
   inserted: el => {
     el.style.height = el.clientWidth;
   },
-  componentUpdated: el => {
+  update: el => {
     el.style.height = el.clientWidth;
   }
 });

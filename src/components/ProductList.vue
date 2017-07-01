@@ -74,13 +74,13 @@ export default {
 .image-flow {
   box-sizing: border-box;
   width: 100%;
+  background: #f0f0f0;
   .image-flow-item-wrapper {
     box-sizing: border-box;
+    display: inline-block;
     width: 50%;
     border: none;
     padding: 5px;
-    background: #f5f5f5;
-    float: left;
     padding: 10px;
     &:nth-of-type(odd) {
       padding: 5px 5px 5px 10px;

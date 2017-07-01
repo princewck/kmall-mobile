@@ -36,6 +36,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     .block-group-item {
+      background: #fff;
       display: block;
       border: 1px solid #f6f6f6;
       border-left: none;
