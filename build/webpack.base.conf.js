@@ -2,12 +2,14 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+const vuxLoader = require('vux-loader')
+var vuxLoaderConfig = require('./vux-loader.conf')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-module.exports = {
+const webpackBaseConfig = {
   entry: {
     app: './src/main.js'
   },
@@ -35,12 +37,12 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
-      },
+      },       
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
-      },
+      },     
       {
         test: /\.js$/,
         loader: 'babel-loader',
@@ -61,7 +63,17 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!sass-loader'
+      },
+      {
+        test: /\.less$/,
+        loader: 'vue-style-loader!css-loader!less-loader'
       }
     ]
   }
 }
+
+module.exports = vuxLoader.merge(webpackBaseConfig, vuxLoaderConfig);
