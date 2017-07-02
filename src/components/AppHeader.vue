@@ -4,7 +4,7 @@
       <img src="../images/logo.png">
     </div>
     <div class="header-fieldset">
-      <span class="header-btn menu-li"><icon name="list"></icon></span>
+      <a class="header-btn menu-li" @click="clickMenu" ><icon name="list"></icon></a>
       <div class="search-input">
         <span><icon name="search"></icon></span>
         <span>搜索商品</span>
@@ -24,6 +24,11 @@ export default {
   },
   components: {
     Icon
+  },
+  methods: {
+    clickMenu: function() {
+      this.$emit('click');
+    }
   }
 }
 </script>
@@ -53,6 +58,7 @@ export default {
     font-size: 1.5rem;
     color: #d86087;
     .header-btn {
+      display: block;
       position: absolute;
       color: #f5f5f5;
       &.menu-li {

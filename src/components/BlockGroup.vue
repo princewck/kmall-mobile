@@ -27,6 +27,7 @@ export default {
 .block-group {
   width: 100%;
   padding: 0;
+  overflow: auto;
   &-header {
     width: 100%;
     padding: 15px;
