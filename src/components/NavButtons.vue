@@ -1,6 +1,6 @@
 <template>
   <div class="nav-button-group">
-    <div class="nav-button-item touch-me"   v-for="item in items" v-bind:key="item.id">
+    <div class="nav-button-item touch-me" @click="prehandlClick(item.onClick)"   v-for="item in buttons" v-bind:key="item.id">
       <img :src="item.img">
       <span v-text="item.title"></span>
     </div>
@@ -10,30 +10,9 @@
 <script>
 export default {
   name: 'navButtons',
-  data() {
-    return {
-      items: [
-        {
-          img: 'https://gw.alicdn.com/tfs/TB11OCuRpXXXXaBXFXXXXXXXXXX-230-230.png?avatar=1',
-          title: '全部分类'
-        },
-        {
-          img: 'https://gw.alicdn.com/tfs/TB1OaIwRXXXXXapXpXXXXXXXXXX-230-230.png?avatar=1',
-          title: '品牌专区'
-        },
-        {
-          img: 'https://gw.alicdn.com/tfs/TB1I9ApRXXXXXcGXpXXXXXXXXXX-230-230.png?avatar=1',
-          title: '好券直播'
-        },
-        {
-          img: 'https://gw.alicdn.com/tfs/TB1NTkrRXXXXXcKXpXXXXXXXXXX-230-230.png?avatar=1',
-          title: '个人中心'
-        },
-      ]
-    }
-  },
-  computed: {
-
+  props: ['buttons'],
+  methods: {
+    prehandlClick: (fn) => (fn() || new Function()())
   }
 }
 </script>

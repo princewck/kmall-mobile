@@ -1,10 +1,10 @@
 <template>
   <div>
-    <categories :show="showDrawer" @toggle="toggleDrawer">
+    <k-drawer title="商品分类" placement="left" :show="showDrawer" @toggle="toggleDrawer">
       <div class="home-wrapper">
         <app-header @click="toggleDrawer"></app-header>
         <div class="main-content">
-          <nav-buttons></nav-buttons>
+          <nav-buttons :buttons="navButtons"></nav-buttons>
           <div class="home-banner-container">
             <swiper class="home-banner" :aspect-ratio="300/800" :auto="true">
               <swiper-item class="swiper-item-img" v-for="(item, index) in imageList" :key="index">
@@ -15,18 +15,41 @@
           <block-group v-for="(group, index) in groups" :key="index" :data="group"></block-group>
           <p class="recommend">精彩推荐</p>
           <product-list :data="pList" @load="loadMoreImgs"></product-list>
-        </div>        
+        </div>
       </div>
-    </categories>
+      <div slot="drawer-content">
+        <CategoryFlow></CategoryFlow>
+      </div>
+    </k-drawer>
   </div>
 </template>
 
 <script>
-import { AppHeader, NavButtons, BlockGroup, ProductList, Categories } from '../components';
+import { AppHeader, NavButtons, BlockGroup, ProductList, KDrawer, CategoryFlow } from '../components';
 import { Swiper, SwiperItem, Flexbox, FlexboxItem } from 'vux';
 export default {
   data() {
+    var vm = this;
     return {
+      navButtons: [
+        {
+          img: 'https://gw.alicdn.com/tfs/TB11OCuRpXXXXaBXFXXXXXXXXXX-230-230.png?avatar=1',
+          title: '全部分类',
+          onClick: vm.toggleDrawer
+        },
+        {
+          img: 'https://gw.alicdn.com/tfs/TB1OaIwRXXXXXapXpXXXXXXXXXX-230-230.png?avatar=1',
+          title: '品牌专区'
+        },
+        {
+          img: 'https://gw.alicdn.com/tfs/TB1I9ApRXXXXXcGXpXXXXXXXXXX-230-230.png?avatar=1',
+          title: '好券直播'
+        },
+        {
+          img: 'https://gw.alicdn.com/tfs/TB1NTkrRXXXXXcKXpXXXXXXXXXX-230-230.png?avatar=1',
+          title: '个人中心'
+        },
+      ],
       imageList: [
         'https://static.vux.li/demo/1.jpg',
         'https://static.vux.li/demo/2.jpg'
@@ -75,7 +98,8 @@ export default {
     NavButtons,
     BlockGroup,
     ProductList,
-    Categories
+    KDrawer,
+    CategoryFlow
   }
 }
 </script>
@@ -86,6 +110,7 @@ export default {
   height: 100%;
   overflow-y: auto;
 }
+
 .main-content {
   background: #f5f5f5;
   position: absolute;

@@ -5,7 +5,7 @@
     </div>
     <div class="header-fieldset">
       <a class="header-btn menu-li" @click="clickMenu" ><icon name="list"></icon></a>
-      <div class="search-input">
+      <div class="search-input" @click="onSearch">
         <span><icon name="search"></icon></span>
         <span>搜索商品</span>
       </div>
@@ -26,8 +26,11 @@ export default {
     Icon
   },
   methods: {
-    clickMenu: function() {
+    clickMenu: function () {
       this.$emit('click');
+    },
+    onSearch: function () {
+      this.$router.push('search');
     }
   }
 }

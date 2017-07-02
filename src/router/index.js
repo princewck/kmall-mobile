@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, ProductDetail } from '@/pages'
+import { Home, ProductDetail, Search } from '@/pages'
 
 Vue.use(Router)
 
@@ -15,6 +15,11 @@ export default new Router({
       path: '/product/:id',
       name: 'ProductDetail',
       component: ProductDetail
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     }
   ]
 })
