@@ -2,8 +2,8 @@
     <div class="flow-wrapper">
       <div class="image-flow">
         <div class="image-flow-item-wrapper" v-for="(image, index) in images" :key="image.id">
-          <a class="image-flow-item touch-me">
-            <x-img v-square :default-src="loadingHolder" :src="image.product_image" :offset="20" :container="container"></x-img>
+          <a @click="goDetail(image)" class="image-flow-item touch-me">
+            <x-img v-square :default-src="loadingHolder" :src="image.product_image" :offset="100" :container="container"></x-img>
             <p class="image-description" v-text="image.product_name"></p>
             <p class="price-field">¥ {{ image.real_price }}  <del>¥{{ image.price }}</del></p>
           </a>
@@ -59,13 +59,17 @@ export default {
     function handler() {
       if (this.loading || !this.images.length) return;
       var offsetBottom = document.body.scrollHeight - (document.body.scrollTop + window.innerHeight);
-      console.log(offsetBottom);
-      if(offsetBottom < 20) {
+      if(offsetBottom < 200) {
         throttle && clearTimeout(throttle);
         throttle = setTimeout(load, 200);
       }
     }
     document.addEventListener('scroll', handler);
+  },
+  methods: {
+    goDetail: function (image) {
+      this.$router.push(`/product/${image.id}`);
+    }
   }
 }
 </script>
@@ -74,13 +78,13 @@ export default {
 .image-flow {
   box-sizing: border-box;
   width: 100%;
+  background: #f0f0f0;
   .image-flow-item-wrapper {
     box-sizing: border-box;
+    display: inline-block;
     width: 50%;
     border: none;
     padding: 5px;
-    background: #f5f5f5;
-    float: left;
     padding: 10px;
     &:nth-of-type(odd) {
       padding: 5px 5px 5px 10px;

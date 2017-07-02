@@ -27,6 +27,7 @@ export default {
 .block-group {
   width: 100%;
   padding: 0;
+  overflow: auto;
   &-header {
     width: 100%;
     padding: 15px;
@@ -36,6 +37,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     .block-group-item {
+      background: #fff;
       display: block;
       border: 1px solid #f6f6f6;
       border-left: none;
