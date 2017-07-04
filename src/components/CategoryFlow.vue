@@ -59,6 +59,7 @@ export default {
 .category-wrapper {
   width: 100%;
   height: 100%;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: row;
   .group-list {
@@ -71,8 +72,9 @@ export default {
     flex: 0 0 auto;
     position: relative;
     overflow-x: hidden;
-    display: flex;
+    display: block;
     flex-direction: row;
+    align-items: stretch;
     ul {
       box-sizing: border-box;
       padding: 0;
@@ -94,8 +96,11 @@ export default {
         white-space: nowrap;
         overflow-x: hidden;
         font-weight: lighter;
+        &:first-of-type {
+          border-top: 1px solid #f5f5f5;
+        }
         &.active {
-          background: #c0c0c0;
+          background: rgba(247, 60, 111, .8);
           color: #fff;
           font-size: .65rem;
           font-weight: bold;

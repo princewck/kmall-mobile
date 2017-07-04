@@ -59,7 +59,7 @@ export default {
     function handler() {
       if (this.loading || !this.images.length) return;
       var offsetBottom = document.body.scrollHeight - (document.body.scrollTop + window.innerHeight);
-      if(offsetBottom < 200) {
+      if(offsetBottom < 500) {
         throttle && clearTimeout(throttle);
         throttle = setTimeout(load, 200);
       }
