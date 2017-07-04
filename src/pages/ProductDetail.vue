@@ -89,10 +89,8 @@ export default {
         title: '淘口令领券',
         content: `复制以下淘口令后打开淘宝App即可${action}啦！\n${command}`,
         onShow() {
-          console.log('Plugin: I\'m showing')
         },
         onHide() {
-          console.log('Plugin: I\'m hiding')
         }
       });
     }
