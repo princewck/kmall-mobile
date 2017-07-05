@@ -9,10 +9,10 @@
     <div class="category-list">
       <ul>
         <li v-for="(category, index) in categories" :key="category.id">
-          <a class="touch-me">
+          <router-link class="touch-me" :to="getProductFlowRoute(category)">
             <img src="https://a3.vimage1.com/upload/goadmin/2017/06/15/14/14975270148380.jpg">
             <p v-text="category.name"></p>
-          </a>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// import { RouterLink } from 'vue-router';
 export default {
   name: 'categoryFlow',
   data() {
@@ -46,6 +47,15 @@ export default {
         .then(({ data }) => {
           vm.$set(vm, 'groups', data.filter(g => g.categories.length));
         });
+    },
+    getProductFlowRoute(category) {
+      return {
+        name: 'ProductList',
+        params: {
+          groupId: this.groups[this.checkedIndex]['id'],
+          categoryId:category.id
+        }
+      };
     },
     changeGroup: function (index) {
       this.$set(this, 'checkedIndex', index);

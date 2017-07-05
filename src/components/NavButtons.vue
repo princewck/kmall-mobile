@@ -12,7 +12,7 @@ export default {
   name: 'navButtons',
   props: ['buttons'],
   methods: {
-    prehandlClick: (fn) => (fn() || new Function()())
+    prehandlClick: (fn) => {(fn || new Function())()}
   }
 }
 </script>

@@ -14,7 +14,7 @@
           </div>
           <block-group v-for="(group, index) in groups" :key="index" :data="group"></block-group>
           <p class="recommend">精彩推荐</p>
-          <product-list :data="pList" @load="loadMoreImgs"></product-list>
+          <product-flow :data="pList" @load="loadMoreImgs" container=".main-content"></product-flow>
         </div>
       </div>
       <div slot="drawer-content">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { AppHeader, NavButtons, BlockGroup, ProductList, KDrawer, CategoryFlow } from '../components';
+import { AppHeader, NavButtons, BlockGroup, ProductFlow, KDrawer, CategoryFlow } from '../components';
 import { Swiper, SwiperItem, Flexbox, FlexboxItem } from 'vux';
 export default {
   data() {
@@ -39,7 +39,8 @@ export default {
         },
         {
           img: 'https://gw.alicdn.com/tfs/TB1OaIwRXXXXXapXpXXXXXXXXXX-230-230.png?avatar=1',
-          title: '品牌专区'
+          title: '品牌专区',
+          onClick: vm.showBrands
         },
         {
           img: 'https://gw.alicdn.com/tfs/TB1I9ApRXXXXXcGXpXXXXXXXXXX-230-230.png?avatar=1',
@@ -74,18 +75,21 @@ export default {
       let vm = this;
       return fetch(`/api/web/products/promotions/${page}`)
         .then(res => (res.json()))
-        .then(data => {
+        .then(({data}) => {
           let newList = Object.assign(vm.pList, {
-            pages: data.data.pages,
-            currentPage: data.data.currentPage,
-            total: data.data.total,
-            data: vm.pList.data.concat(data.data.data)
+            pages: data.pages,
+            currentPage: data.currentPage,
+            total: data.total,
+            data: vm.pList.data.concat(data.data)
           });
           vm.$set(vm, 'pList', newList);
         });
     },
     toggleDrawer: function () {
       this.$set(this, 'showDrawer', !this.showDrawer);
+    },
+    showBrands() {
+      this.$router.push('brand');
     }
   },
   components: {
@@ -97,7 +101,7 @@ export default {
 
     NavButtons,
     BlockGroup,
-    ProductList,
+    ProductFlow,
     KDrawer,
     CategoryFlow
   }

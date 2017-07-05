@@ -18,18 +18,20 @@
 import { XImg, LoadMore } from 'vux';
 import loading from '../images/loading';
 export default {
-  name: 'productList',
+  name: 'productFlow',
   components: {XImg, LoadMore},
   props: ['data'],
   data() {
+    let vm = this;
     return {
       loading: false,
       loadingHolder: loading,
-      container: document.querySelector('.image-flow')
+      container: vm.container
     }
   },
   computed: {
     images: function() {
+      console.log(this.data);
       return this.data.data;
     },
     pagination: function() {
