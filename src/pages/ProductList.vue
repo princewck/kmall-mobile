@@ -1,7 +1,7 @@
 <template>
   <div>
     <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">{{ categoryName }}</x-header>
-    <Breadcrumb :navs="getNavs()"></Breadcrumb>
+    <Breadcrumb :navs="navs" @onClick="clickBreadcrumb"></Breadcrumb>
     <div class="product-flow-wrapper">
       <product-flow :data="pList" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
     </div>
@@ -22,38 +22,32 @@ export default {
     return {
       pList: { data: [], currentPage: 0 },
       groupName: null,
-      categoryName: null
+      categoryName: null,
+      showDrawer: false
     }
   },
   computed: {
-    // categoryName: function () {
-    //   return '商品列表';
-    //   // return this.$route.params.categoryName || '商品列表';
-    // }
-  },
-  mounted() {
-    this.fetchProducts();
-  },
-  methods: {
-    getNavs() {
+    navs() {
       let routeParams = this.$route.params;
       let categoryId = routeParams.categoryId;
       let groupId = routeParams.groupId;
       var vm = this;
       if (!this.groupName) {
         fetch(`/api/web/categoryGroup/${groupId}`).then((res) => res.json())
-          .then(({data}) => {
-            console.log(data);
+          .then(({ data }) => {
             vm.groupName = data.name;
             data.categories.forEach(c => {
-              if (c.id == categoryId ) 
+              if (c.id == categoryId)
                 vm.categoryName = c.name;
             });
           });
       }
       return [
         {
-          text: '全部商品'
+          text: '全部商品',
+          onClick: function () {
+            vm.$router.replace('/categories');
+          }
         },
         {
           text: vm.groupName,
@@ -62,6 +56,14 @@ export default {
           text: vm.categoryName
         }
       ]
+    }
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    init() {
+      this.fetchProducts(1);
     },
     goBack() {
       history.length > 1
@@ -84,8 +86,8 @@ export default {
         groupId: 0,
         kwd: ''
       };
-      categoryId && (params.categoryIds = [categoryId]);
-      groupId && (params.groupId = groupId);
+      categoryId && (params.categoryIds = [String(categoryId)]);
+      groupId && (params.groupId = String(groupId));
       fetch(`/api/web/products/query/p/${page}`, {
         method: 'POST',
         body: JSON.stringify(params)
@@ -99,9 +101,12 @@ export default {
             total: data.total,
             data: vm.pList.data.concat(data.data)
           });
-          console.log(newList);
           vm.$set(vm, 'pList', newList);
         });
+    },
+    clickBreadcrumb(nav) {
+      if (nav.link) return this.$route.push(nav.link);
+      if (nav.onClick) return nav.onClick();
     }
   }
 }

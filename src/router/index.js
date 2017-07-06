@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, ProductDetail, Search, Brand, ProductList } from '@/pages'
+import { Home, ProductDetail, Search, Brand, ProductList, Categories } from '@/pages'
 
 Vue.use(Router)
 
@@ -30,6 +30,11 @@ export default new Router({
       path: '/products/:groupId/:categoryId',
       name: 'ProductList',
       component: ProductList
-    }
+    },
+    {
+      path: '/categories',
+      name: 'Categories',
+      component: Categories
+    }    
   ]
 })

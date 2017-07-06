@@ -9,10 +9,10 @@
     <div class="category-list">
       <ul>
         <li v-for="(category, index) in categories" :key="category.id">
-          <router-link class="touch-me" :to="getProductFlowRoute(category)">
+          <a class="touch-me" @click="goProductFlowRoute(category)">
             <img src="https://a3.vimage1.com/upload/goadmin/2017/06/15/14/14975270148380.jpg">
             <p v-text="category.name"></p>
-          </router-link>
+          </a>
         </li>
       </ul>
     </div>
@@ -40,6 +40,9 @@ export default {
     this.load();
   },
   methods: {
+    log() {
+      console.log(arguments);
+    },
     load() {
       let vm = this;
       fetch('/api/web/categoryGroups/onbanner')
@@ -48,14 +51,16 @@ export default {
           vm.$set(vm, 'groups', data.filter(g => g.categories.length));
         });
     },
-    getProductFlowRoute(category) {
-      return {
+    goProductFlowRoute(category) {
+      this.$router.push({
         name: 'ProductList',
         params: {
           groupId: this.groups[this.checkedIndex]['id'],
-          categoryId:category.id
-        }
-      };
+          categoryId: category.id
+        },
+        force: true
+      });
+      return this.$emit('click');
     },
     changeGroup: function (index) {
       this.$set(this, 'checkedIndex', index);

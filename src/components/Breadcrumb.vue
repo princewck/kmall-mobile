@@ -1,19 +1,23 @@
 <template>
   <div class="crumb-wrapper">
-    <!--<span>全部商品</span>
-    <span>女装</span>
-    <span>短裤</span>-->
-    <span v-for="(nav, index) in navs" :key="index" v-text="nav.text">
-      <span><a :href="nav.link" v-if="nav.link" v-text="nav.text"></a></span>
-      <span :href="nav.link" v-if="nav.link" v-text="nav.text"></span>
-    </span>
+    <div v-for="(nav, index) in navs" :key="index">
+      <a @click="onClick(nav)" v-text="nav.text"></a><icon class="fa-icon" name="angle-right"></icon>
+    </div>
   </div>
 </template>
 
 <script>
+import 'vue-awesome/icons/angle-right';
+import Icon from 'vue-awesome/components/Icon'
 export default {
   name: 'breadcrumb',
-  props: ['navs']
+  components: {Icon},
+  props: ['navs'],
+  methods: {
+    onClick(nav) {
+      this.$emit('onClick', nav);
+    }
+  }
 }
 </script>
 
@@ -28,31 +32,22 @@ export default {
     justify-content: start;
     line-height: 2rem;
     background: #fbf2f5;
-    span {
-      display: block;
+    padding-left: 10px;
+    & > div {
       float: left;
-      font-size: .8rem;
-      color: #c7c7c7;
-      height: 100%;
-      padding-left: 2rem;
-      text-indent: 5px;
-      background-image: linear-gradient(to right, #fff, #fbf2f5);
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       a {
+        font-size: .8rem;
         text-decoration: none;
-        color: gray;
+        color: #9e9e9e;
       }
-      &:first-of-type {
-        padding-left: 5px;
-      }
-      &::after {
-        content: '';
-        border: 1rem solid transparent;
-        border-left-color: #fbf2f5;
-        border-top-color: #fbf2f5;
-        width: 0;
-        height: 0;
-        margin-right: 1rem;
-        position: absolute;
+      .fa-icon {
+        fill: #9e9e9e;
+        height: 1.5rem;
+        padding: 2px 5px;
       }
     }
   }
