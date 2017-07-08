@@ -1,6 +1,6 @@
 <template>
   <div>
-    <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">{{ categoryName }}</x-header>
+    <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">{{ brandName }}</x-header>
     <Breadcrumb :navs="navs" @onClick="clickBreadcrumb"></Breadcrumb>
     <div class="product-flow-wrapper">
       <product-flow :data="pList" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
@@ -12,7 +12,7 @@
 import { XHeader } from 'vux';
 import { ProductFlow, Breadcrumb } from '../components';
 export default {
-  name: 'product-list',
+  name: 'brand-collection',
   components: {
     XHeader,
     ProductFlow,
@@ -21,27 +21,13 @@ export default {
   data() {
     return {
       pList: { data: [], currentPage: 0 },
-      groupName: null,
-      categoryName: null,
+      brandName: null,
       showDrawer: false
     }
   },
   computed: {
     navs() {
-      let routeParams = this.$route.params;
-      let categoryId = routeParams.categoryId;
-      let groupId = routeParams.groupId;
       var vm = this;
-      if (!this.groupName) {
-        fetch(`/api/web/categoryGroup/${groupId}`).then((res) => res.json())
-          .then(({ data }) => {
-            vm.groupName = data.name;
-            data.categories.forEach(c => {
-              if (c.id == categoryId)
-                vm.categoryName = c.name;
-            });
-          });
-      }
       return [
         {
           text: '全部商品',
@@ -50,15 +36,27 @@ export default {
           }
         },
         {
-          text: vm.groupName,
+          text: '全部品牌',
+          onClick: function () {
+            vm.$router.replace('/brands');
+          }
         },
         {
-          text: vm.categoryName
+          text: vm.brandName,
         }
       ]
     }
   },
   mounted() {
+    var vm = this;
+    let routeParams = this.$route.params;
+    let brandId = routeParams.brandId;
+    if (!this.brandName) {
+      fetch(`/api/web/brand/${brandId}`).then((res) => res.json())
+        .then(({ data }) => {
+          vm.brandName = data.name;
+        });
+    }
     this.init();
   },
   methods: {
@@ -78,16 +76,13 @@ export default {
     fetchProducts(page = 1) {
       let vm = this;
       let routeParams = this.$route.params;
-      let categoryId = routeParams.categoryId;
-      let groupId = routeParams.groupId;
+      let brandId = routeParams.brandId;
       let params = {
-        brandIds: [],
+        brandIds: [brandId],
         categoryIds: [],
         groupId: 0,
         kwd: ''
       };
-      categoryId && (params.categoryIds = [String(categoryId)]);
-      groupId && (params.groupId = String(groupId));
       fetch(`/api/web/products/query/p/${page}`, {
         method: 'POST',
         body: JSON.stringify(params),
@@ -95,7 +90,6 @@ export default {
       })
         .then(res => res.json())
         .then(({ data }) => {
-          console.log(data);
           let newList = Object.assign(vm.pList, {
             pages: data.pages,
             currentPage: data.currentPage,

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import 'fetch-polyfill2';
 import './directives';
 export default {
   name: 'app'
@@ -31,5 +32,6 @@ body,html {
 }
 .bounce {
   transform: scale(.98);
+  background: #dedede;
 }
 </style>

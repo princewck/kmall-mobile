@@ -1,7 +1,8 @@
 <template>
   <div class="crumb-wrapper">
     <div v-for="(nav, index) in navs" :key="index">
-      <a @click="onClick(nav)" v-text="nav.text"></a><icon class="fa-icon" name="angle-right"></icon>
+      <a @click="onClick(nav)" v-text="nav.text"></a>
+      <icon class="fa-icon" name="angle-right" v-if="!$last(index)"></icon>
     </div>
   </div>
 </template>
@@ -16,8 +17,11 @@ export default {
   methods: {
     onClick(nav) {
       this.$emit('onClick', nav);
-    }
-  }
+    },
+    $last(index) {
+      return index == this.navs.length -1;
+    }    
+  },
 }
 </script>
 

@@ -9,8 +9,9 @@
           </a>
         </div>   
       </div>
-      <load-more v-if="!noMorePages" tip="加载中..."></load-more>
+      <load-more v-if="!noMorePages && !emptyList" tip="加载中..."></load-more>
       <load-more v-if="noMorePages" :show-loading="false" tip="没有更多啦."></load-more>
+      <load-more v-if="emptyList" :show-loading="false" tip="oh~ 老板好像忘记进货了."></load-more>
     </div>
 </template>
 
@@ -31,7 +32,6 @@ export default {
   },
   computed: {
     images: function() {
-      console.log(this.data);
       return this.data.data;
     },
     pagination: function() {
@@ -42,7 +42,10 @@ export default {
       }
     },
     noMorePages: function() {
-      return this.data.currentPage >= this.data.pages;
+      return this.data.currentPage >= this.data.pages && this.images.length;
+    },
+    emptyList: function () {
+      return this.images.length === 0;
     }
   },
   mounted: function() {
@@ -81,6 +84,7 @@ export default {
   box-sizing: border-box;
   width: 100%;
   background: #f0f0f0;
+  text-align: left;
   .image-flow-item-wrapper {
     box-sizing: border-box;
     display: inline-block;

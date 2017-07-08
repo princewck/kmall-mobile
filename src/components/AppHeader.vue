@@ -65,11 +65,12 @@ export default {
       position: absolute;
       color: #f5f5f5;
       &.menu-li {
-        top: 5px;
-        left: 10px;
+        top: 15px;
+        left: 20px;
         .fa-icon {
-          height: 1.25rem;
+          height: 1rem;
           width: auto;
+          transform: scale(1.6 );
         }
       }
     }

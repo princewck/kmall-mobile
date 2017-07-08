@@ -3,7 +3,7 @@
     <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">
       品牌列表</x-header>
     <grid>
-      <grid-item :label="brand.name" v-for="(brand, index) in brands" :key="brand.id">
+      <grid-item :label="brand.name" :link="`/brand/collection/${brand.id}`" v-for="(brand, index) in brands" :key="brand.id">
         <img slot="icon" :src="brand.$logo">
       </grid-item>
     </grid>
@@ -43,6 +43,9 @@ export default {
         ? (this.$router.go(-1))
         : (this.$router.replace('/'));
     },
+    goCollection(id) {
+      this.$router.replace(`/brand/collection/${id}`);
+    }
   }
 
 }

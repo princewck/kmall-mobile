@@ -62,8 +62,8 @@ export default {
     }
   },
   mounted: function () {
-    // var self = this;
-    // self.fetchList();
+    var self = this;
+    self.fetchList();
   },
   methods: {
     loadMoreImgs: function (data) {
@@ -89,7 +89,7 @@ export default {
       this.$set(this, 'showDrawer', !this.showDrawer);
     },
     showBrands() {
-      this.$router.push('brand');
+      this.$router.push('brands');
     }
   },
   components: {

@@ -1,4 +1,3 @@
-import 'whatwg-fetch';//fetch pollyfill
 import Group from './group';
 
 

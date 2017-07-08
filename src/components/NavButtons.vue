@@ -28,7 +28,7 @@ export default {
       float: left;
       padding: 15px;
       width: 25%;
-      font-size: .8em;
+      font-size: .7rem;
       border: 1px solid #f5f5f5;
       border-left: none;
       cursor:pointer;

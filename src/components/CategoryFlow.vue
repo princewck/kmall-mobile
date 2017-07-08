@@ -40,9 +40,6 @@ export default {
     this.load();
   },
   methods: {
-    log() {
-      console.log(arguments);
-    },
     load() {
       let vm = this;
       fetch('/api/web/categoryGroups/onbanner')
