@@ -38,6 +38,7 @@ export default {
       img {
         display: block;
         border-radius: 50%;
+        border: 1px solid #ff7ca0;
         width: 100%;
         margin-left: auto;
         margin-right: auto;

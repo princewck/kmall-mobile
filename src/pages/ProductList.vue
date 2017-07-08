@@ -95,7 +95,6 @@ export default {
       })
         .then(res => res.json())
         .then(({ data }) => {
-          console.log(data);
           let newList = Object.assign(vm.pList, {
             pages: data.pages,
             currentPage: data.currentPage,
