@@ -38,7 +38,6 @@ export default {
   },
   computed: {
     searchMuted: function() {
-      console.log(this.query, !String(this.query).trim());
       return !String(this.query).trim();
     }
   },
@@ -53,7 +52,6 @@ export default {
     },
     clear() {
       this.query = '';
-      console.log('ss');
     }
   }
 }
@@ -129,7 +127,7 @@ export default {
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      background: #ff9800;
+      background: #ff004a;
       color: #fff;
       &.muted {
         background: #9e9e9e;
