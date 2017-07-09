@@ -8,7 +8,7 @@
           <div class="home-banner-container">
             <swiper class="home-banner" :aspect-ratio="300/800" :auto="true">
               <swiper-item class="swiper-item-img" v-for="(item, index) in imageList" :key="index">
-                <a :href="item.link" target="_blank"><img :src="item.image"></a>
+                <a :href="item.m_link" target="_blank"><img :src="item.image"></a>
               </swiper-item>
             </swiper>
           </div>
@@ -48,16 +48,17 @@ export default {
         },
         {
           img: imgCoupons,
-          title: '好券直播'
+          title: '好券直播',
+          onClick: ()=>{alert('敬请期待……')}
         },
         {
           img: imgPromotion,
-          title: '优惠活动'
+          title: '优惠活动',
+          onClick: ()=>{alert('敬请期待……')}
         },
       ],
       imageList: [],
-      groups: [
-        { "list": [{ "sort": 0, "title": "包包", "description": "包包", "link": "http://quanerdai.com/#!/products/g/22/c/36&37&39&40/b//kw//p/1", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/41bd65b28bf74b50aea13b32e4fb76da" }, { "sort": 0, "title": "美食", "description": "美食", "link": "http://quanerdai.com/#!/products/g/33/c//b//kw//p/0", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/a7e0bec6dc264578a08c9db99314feb0" }, { "sort": 0, "title": "化妆品", "description": "化妆品", "link": "http://quanerdai.com/#!/products/g/23/c//b//kw//p/", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/1b5d0710aaca48fd9af4ea61e0dc8c07" }, { "sort": 0, "title": "手机数码", "description": "手机数码", "link": "http://quanerdai.com/#!/products/g/25/c//b//kw//p/", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/f503e4d7b37747e395300239c37f5250" }, { "sort": 0, "title": "鞋子", "description": "鞋子", "link": "http://quanerdai.com/#!/products/g/22/c/34&35/b//kw//p/1", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/c5a0a5dd1d6241deb64f84a8c27b42bc" }, { "sort": 0, "title": "衣服", "description": "流行女装", "link": "http://quanerdai.com/#!/products/g/20/c/15&16&17&18&19&20&25/b//kw//p/1", "image": "http://princewck.oss-cn-shanghai.aliyuncs.com/img/924f47fd86f44b23b040796337c1cebe" }], "name": "活动专区" }],
+      groups: [],
       pList: { data: [], currentPage: 0 },
       showDrawer: false
     }
@@ -66,14 +67,23 @@ export default {
     var self = this;
     self.fetchList();
     self.fetchBanners();
+    self.fetchBlockGroups();
   },
   methods: {
+    fetchBlockGroups() {
+      let vm = this;
+      fetch('/api/web/blockGroup')
+        .then(res => res.json())
+        .then(({data}) => {
+          vm.$set(vm, 'groups', data)
+        });
+    },
     fetchBanners() {
       let vm = this;
       fetch('/api/web/banners')
         .then(res => res.json())
         .then(({data}) => {
-          vm.$set(vm, 'imageList', data);
+          vm.$set(vm, 'imageList', data.filter(item => item.mobile));
         });
     },
     loadMoreImgs: function (data) {

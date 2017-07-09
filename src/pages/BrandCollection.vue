@@ -3,7 +3,7 @@
     <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">{{ brandName }}</x-header>
     <Breadcrumb :navs="navs" @onClick="clickBreadcrumb"></Breadcrumb>
     <div class="product-flow-wrapper">
-      <product-flow :data="pList" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
+      <product-flow :data="pList" :requesting="requesting" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
     return {
       pList: { data: [], currentPage: 0 },
       brandName: null,
-      showDrawer: false
+      showDrawer: false,
+      requesting: false
     }
   },
   computed: {
@@ -83,6 +84,7 @@ export default {
         groupId: 0,
         kwd: ''
       };
+      vm.$set(vm, 'requesting', true);
       fetch(`/api/web/products/query/p/${page}`, {
         method: 'POST',
         body: JSON.stringify(params),
@@ -90,6 +92,7 @@ export default {
       })
         .then(res => res.json())
         .then(({ data }) => {
+          vm.$set(vm, 'requesting', false);
           let newList = Object.assign(vm.pList, {
             pages: data.pages,
             currentPage: data.currentPage,

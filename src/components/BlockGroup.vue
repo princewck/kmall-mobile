@@ -2,7 +2,7 @@
   <div class="block-group">
     <div class="block-group-header" v-text="name"></div>
     <div class="block-group-content">
-      <a class="block-group-item" v-for="(item, index) in items" :key="index">
+      <a class="block-group-item" :href="item.m_link || '#'" v-for="(item, index) in items" :key="index">
         <label v-text="item.title"></label>
         <img :src="item.image" class="touch-me" alt="item.title">
         <p v-text="item.description"></p>
@@ -37,6 +37,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     .block-group-item {
+      text-decoration: none;
       background: #fff;
       display: block;
       border: 1px solid #f6f6f6;

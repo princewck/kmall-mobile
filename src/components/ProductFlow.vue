@@ -10,8 +10,9 @@
         </div>   
       </div>
       <load-more v-if="!noMorePages && !emptyList" tip="加载中..."></load-more>
+      <load-more v-if="requesting" tip="加载中..."></load-more>
       <load-more v-if="noMorePages" :show-loading="false" tip="没有更多啦."></load-more>
-      <load-more v-if="emptyList" :show-loading="false" tip="oh~ 老板好像忘记进货了."></load-more>
+      <load-more v-if="emptyList && !requesting" :show-loading="false" tip="oh~ 老板好像忘记进货了."></load-more>
     </div>
 </template>
 
@@ -21,7 +22,7 @@ import loading from '../images/loading';
 export default {
   name: 'productFlow',
   components: {XImg, LoadMore},
-  props: ['data'],
+  props: ['data', 'requesting'],
   data() {
     let vm = this;
     return {
