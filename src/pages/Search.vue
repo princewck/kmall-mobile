@@ -42,7 +42,6 @@ export default {
     },
     searchHistory: function () {
       let history = this.getCache();
-      console.log(history);
       return history.length > 15 ? history.splice(0, 15): history;
     }
   },
