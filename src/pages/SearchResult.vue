@@ -3,7 +3,7 @@
     <x-header :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">"{{ query }}"的搜索结果</x-header>
     <Breadcrumb :navs="navs" @onClick="clickBreadcrumb"></Breadcrumb>
     <div class="product-flow-wrapper">
-      <product-flow :data="pList" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
+      <product-flow :data="pList" :requesting="loading" @load="loadMore" :dely="300" container=".product-flow-wrapper"></product-flow>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
     return {
       pList: { data: [], currentPage: 0 },
       query: null,
-      showDrawer: false
+      showDrawer: false,
+      loading: false
     }
   },
   computed: {
@@ -65,7 +66,7 @@ export default {
     },
     loadMore(data) {
       this.fetchProducts(data.page).then(() => {
-        setTimeout(data.termLoading, 2000);
+        setTimeout(data.termLoading, 1000);
       });
     },
     fetchProducts(page = 1) {
@@ -78,13 +79,15 @@ export default {
         groupId: 0,
         kwd: query
       };
-      fetch(`/api/web/products/query/p/${page}`, {
+      vm.$set(vm, 'loading', true);
+      return fetch(`/api/web/products/query/p/${page}`, {
         method: 'POST',
         body: JSON.stringify(params),
         headers: { 'Content-Type': 'application/json', }
       })
         .then(res => res.json())
         .then(({ data }) => {
+          vm.$set(vm, 'loading', false);
           let newList = Object.assign(vm.pList, {
             pages: data.pages,
             currentPage: data.currentPage,

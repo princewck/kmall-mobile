@@ -10,7 +10,7 @@
       <ul>
         <li v-for="(category, index) in categories" :key="category.id">
           <a class="touch-me" @click="goProductFlowRoute(category)">
-            <img src="https://a3.vimage1.com/upload/goadmin/2017/06/15/14/14975270148380.jpg">
+            <img :src="getCategoryImage(category)">
             <p v-text="category.name"></p>
           </a>
         </li>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-// import { RouterLink } from 'vue-router';
+import holder from '../images/favicon.jpg';
 export default {
   name: 'categoryFlow',
   data() {
@@ -61,6 +61,9 @@ export default {
     },
     changeGroup: function (index) {
       this.$set(this, 'checkedIndex', index);
+    },
+    getCategoryImage(category) {
+      return category.image || holder;
     }
   }
 }
@@ -133,12 +136,12 @@ export default {
       overflow: auto;
       margin: 0;
       padding: 0;
+      text-align: left;
       li {
-        display: block;
+        display: inline-block;
         box-sizing: border-box;
         font-size: .8rem;
         width: 50%;
-        float: left;
         text-align: center;
         padding: 5px 5px 5px 5px;
         a {

@@ -12,10 +12,10 @@
         <a @click="search" class="touch-me" :class="{muted: searchMuted }">搜索</a>
       </div>
     </div>
-    <load-more :show-loading="false" :style="{'margin-bottom': 0}" tip="快速搜索"></load-more>
+    <load-more :show-loading="false" v-if="searchHistory.length" :style="{'margin-bottom': 0}" tip="快速搜索"></load-more>
     <div class="quick-search">
       <ul>
-        <li class="touch-me" v-for="(item, index) in 20" :key="index">连衣裙</li>
+        <li class="touch-me" v-for="(item, index) in searchHistory" :key="index" v-text="item" @click="fastSearch(item)"></li>
       </ul>
     </div>
   </div>
@@ -39,6 +39,11 @@ export default {
   computed: {
     searchMuted: function() {
       return !String(this.query).trim();
+    },
+    searchHistory: function () {
+      let history = this.getCache();
+      console.log(history);
+      return history.length > 15 ? history.splice(0, 15): history;
     }
   },
   methods: {
@@ -46,12 +51,29 @@ export default {
       this.$router.go(-1);
     },
     search() {
+      var cache = this.getCache();
+      if (!~cache.indexOf(this.query)) {
+        this.setCache(this.query);
+      }
       if (!this.query) return;
-      var query = this.query;
-      this.$router.push(`/query/${query}`);
+      this.$router.push(`/query/${this.query}`);
+    },
+    fastSearch(kw) {
+      if (!kw) return;
+      this.$router.push(`/query/${kw}`);
     },
     clear() {
       this.query = '';
+    },
+    setCache(word) {
+      if (!word) return;
+      var cache = this.getCache();
+      cache.push(word);
+      localStorage.setItem('kmall_search_history', JSON.stringify(cache));
+    },
+    getCache() {
+      var cache = localStorage.getItem('kmall_search_history');
+      return cache = cache ? JSON.parse(cache) : [];
     }
   }
 }
