@@ -44,16 +44,16 @@ export default {
         {
           img: imgBrands,
           title: '品牌专区',
-          onClick: vm.showBrands
+          onClick: vm.goBrands
         },
         {
           img: imgCoupons,
           title: '好券直播',
-          onClick: ()=>{alert('敬请期待……')}
+          onClick: vm.goCoupons
         },
         {
           img: imgPromotion,
-          title: '优惠活动',
+          title: '限时抢购',
           onClick: ()=>{alert('敬请期待……')}
         },
       ],
@@ -108,8 +108,11 @@ export default {
     toggleDrawer: function () {
       this.$set(this, 'showDrawer', !this.showDrawer);
     },
-    showBrands() {
+    goBrands() {
       this.$router.push('brands');
+    },
+    goCoupons() {
+      this.$router.push('coupons');
     }
   },
   components: {

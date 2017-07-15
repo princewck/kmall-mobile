@@ -29,12 +29,12 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api': {
-        // target: 'http://localhost:3001',
-        target: 'http://quanerdai.com',
+        target: 'http://localhost:3001',
+        // target: 'http://quanerdai.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/api'
-          // '^/api': '/'
+          // '^/api': '/api'
+          '^/api': '/'
         }
       }
     },

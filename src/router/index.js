@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, ProductDetail, Search, Brand, ProductList, Categories, BrandCollection, SearchResult } from '@/pages'
+import { Home, ProductDetail, Search, Brand, ProductList, Categories, BrandCollection, SearchResult, Coupons, CouponDetail } from '@/pages'
 
 Vue.use(Router)
 
@@ -45,6 +45,16 @@ export default new Router({
       path: '/categories',
       name: 'Categories',
       component: Categories
-    }    
+    },
+    {
+      path: '/coupons',
+      name: 'Coupons',
+      component: Coupons
+    },
+    {
+      path: '/coupons/detail/:kw/:id',
+      name: 'CouponDetail',
+      component: CouponDetail
+    }            
   ]
 })
