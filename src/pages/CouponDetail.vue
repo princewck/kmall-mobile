@@ -7,7 +7,7 @@
       </div>
       <img :src="data.pict_url">
       <p class="price-row">
-        <span class="real-price" v-text="prehandlePrice(data.zk_final_price)"></span>
+        <span class="real-price" v-text="prehandlePrice(data.zk_final_price - getCouponPrice(data.coupon_info))"></span>
         <span v-if="data.coupon_info">(使用本网内部优惠券后)</span>
       </p>
       <p class="desc-row" v-text="data.title"></p>
@@ -61,7 +61,6 @@ export default {
     this.$router.beforeEach((to, from, next) => {
       next();
     });
-    console.log('coupon detail');
   },
   computed: {
     isWechat: function () {

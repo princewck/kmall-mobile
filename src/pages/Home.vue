@@ -48,7 +48,7 @@ export default {
         },
         {
           img: imgCoupons,
-          title: '好券直播',
+          title: '好券搜索',
           onClick: vm.goCoupons
         },
         {

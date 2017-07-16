@@ -1,10 +1,10 @@
 export {default as Home} from './Home';
 export {default as ProductDetail} from './ProductDetail';
-export {default as CouponDetail} from './CouponDetail';
 export {default as Search} from './Search';
 export {default as Brand} from './Brand';
 export {default as ProductList} from './ProductList';
 export {default as Categories} from './Categories';
 export {default as BrandCollection} from './BrandCollection';
 export {default as SearchResult} from './SearchResult';
-export {default as Coupons} from './Coupons';
+export {default as CouponDetail} from './CouponDetail';
+export {default as CouponList} from './CouponList';

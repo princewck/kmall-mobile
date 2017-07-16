@@ -6,3 +6,4 @@ export {default as CouponFlow} from './CouponFlow';
 export {default as KDrawer} from './KDrawer';
 export {default as CategoryFlow} from './CategoryFlow';
 export {default as Breadcrumb} from './Breadcrumb';
+export {default as SearchPanel} from './SearchPanel';
