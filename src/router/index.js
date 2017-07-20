@@ -16,8 +16,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      name: 'home',
+      component: Home,
+      children: [
+        {path: '/detail/:id', component: ProductDetail, name: 'home:product:detail'}
+      ]
     },
     {
       path: '/product/:id',

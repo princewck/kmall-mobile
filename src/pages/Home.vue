@@ -1,6 +1,7 @@
 <template>
   <div>
-    <k-drawer title="商品分类" placement="left" :show="showDrawer" @toggle="toggleDrawer">
+    <router-view></router-view>
+    <k-drawer v-show="routeName == 'home'" title="商品分类" placement="left" :show="showDrawer" @toggle="toggleDrawer">
       <div class="home-wrapper">
         <app-header @click="toggleDrawer"></app-header>
         <div class="main-content">
@@ -14,7 +15,7 @@
           </div>
           <block-group v-for="(group, index) in groups" :key="index" :data="group"></block-group>
           <p class="recommend">精彩推荐</p>
-          <product-flow :data="pList" @load="loadMoreImgs" container=".main-content"></product-flow>
+          <product-flow :data="pList" @load="loadMoreImgs" :same-page="true" @onClick="clickProduct" container=".main-content"></product-flow>
         </div>
       </div>
       <div slot="drawer-content">
@@ -60,7 +61,8 @@ export default {
       imageList: [],
       groups: [],
       pList: { data: [], currentPage: 0 },
-      showDrawer: false
+      showDrawer: false,
+      routeName: this.$route.name
     }
   },
   mounted: function () {
@@ -113,6 +115,9 @@ export default {
     },
     goCoupons() {
       this.$router.push('coupons');
+    },
+    clickProduct(productId) {
+      this.$router.push(`/detail/${productId}`);
     }
   },
   components: {

@@ -22,7 +22,7 @@ import loading from '../images/loading';
 export default {
   name: 'productFlow',
   components: {XImg, LoadMore},
-  props: ['data', 'requesting'],
+  props: ['data', 'requesting', 'samePage'],
   data() {
     let vm = this;
     return {
@@ -74,7 +74,11 @@ export default {
   },
   methods: {
     goDetail: function (image) {
-      this.$router.push(`/product/${image.id}`);
+      if (this.samePage) {
+        this.$emit('onClick', image.id);
+      } else {
+        this.$router.push(`/product/${image.id}`);
+      }
     }
   }
 }
