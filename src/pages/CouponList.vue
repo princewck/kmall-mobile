@@ -1,8 +1,8 @@
 <template>
   <div>
     <router-view></router-view>
-    <x-header v-if="routeName === 'coupons'" :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">搜优惠券{{ kw ? ': ' + kw : '' }}</x-header>
-    <div v-if="routeName === 'coupons'">
+    <x-header v-show="routeName === 'coupons'" :left-options="{backText: '返回', preventGoBack: true}" transition="all 1s ease-in" style="background: #f73c6f;flex:0 0 auto;" @on-click-back="goBack">搜优惠券{{ kw ? ': ' + kw : '' }}</x-header>
+    <div v-show="routeName === 'coupons'">
       <search-panel @onSelect="changeKw"></search-panel>
       <coupon-flow  :data="list" :kw="kw" :no-more-pages="noMorePages" @load="loadMore"  :requesting="requesting"></coupon-flow>
     </div>
@@ -33,7 +33,6 @@ export default {
   },
   computed: {
     routeName: function () {
-      console.log(this.$route);
       return this.$route.name;
     }
   },
@@ -44,7 +43,6 @@ export default {
       fetch(`/api/web/nice_coupons/${this.kw || 'all'}/${this.page+1}`)
         .then(res => res.json())
         .then(({results}) => {
-          console.log(results.tbk_coupon);
           vm.$set(this, 'list', vm.list.concat(results.tbk_coupon));
           vm.$set(this, 'page', vm.page+1);
           vm.$set(this, 'requesting', false);
@@ -63,7 +61,6 @@ export default {
   watch: {
     kw() {
       this.$set(this, 'list', []);
-      console.log('搜索词发生变化，从第一页开始显示');
       this.page = 0;
       this.fetchCoupons();
     }
