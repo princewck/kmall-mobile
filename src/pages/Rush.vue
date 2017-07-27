@@ -117,7 +117,6 @@ export default {
     },
     timeline() {
       var vm  = this;
-      console.log(vm);
       if (moment().get('hour') < 12) {
         return vm.fulltimeline.slice(0, 23);
       } else {
@@ -128,11 +127,9 @@ export default {
   mounted() {
     moment().locale('zh-cn');
     this.$route.params.start = new Date();//写死当前时间
-    console.log('start:', moment(this.$route.params.start).format('YYYY-MM-DD HH:mm:ss'));
     this.$set(this, 'current', moment(this.$route.params.start).startOf('hour'));
   },
   updated() {
-    console.log('update');
     this.scrollIntoView();
   },
   methods: {
