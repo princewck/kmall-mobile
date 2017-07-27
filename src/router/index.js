@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { Home, ProductDetail, Search, Brand, ProductList, Categories, BrandCollection, SearchResult, CouponList, CouponDetail } from '@/pages'
+import { Home, ProductDetail, Search, Brand, ProductList, Categories, BrandCollection, SearchResult, CouponList, CouponDetail, Rush} from '@/pages'
 
 Vue.use(Router)
 
@@ -64,6 +64,11 @@ export default new Router({
       children: [
         { path: 'detail/:kw/:id', component: CouponDetail, name: 'coupon/detail' }
       ]
+    },
+    {
+      path: '/qiang',
+      name: 'qiang',
+      component: Rush
     }
   ]
 })

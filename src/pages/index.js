@@ -8,3 +8,4 @@ export {default as BrandCollection} from './BrandCollection';
 export {default as SearchResult} from './SearchResult';
 export {default as CouponDetail} from './CouponDetail';
 export {default as CouponList} from './CouponList';
+export {default as Rush} from './Rush';

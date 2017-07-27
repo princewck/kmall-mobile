@@ -55,7 +55,7 @@ export default {
         {
           img: imgPromotion,
           title: '限时抢购',
-          onClick: ()=>{alert('敬请期待……')}
+          onClick: vm.goRushPruchasing
         },
       ],
       imageList: [],
@@ -115,6 +115,9 @@ export default {
     },
     goCoupons() {
       this.$router.push('coupons');
+    },
+    goRushPruchasing() {
+      this.$router.push('qiang');
     },
     clickProduct(productId) {
       this.$router.push(`/detail/${productId}`);
