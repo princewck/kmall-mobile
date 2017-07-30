@@ -32,6 +32,7 @@ export default {
   display: flex;
   flex-direction: column;
   .category-content {
+    height: 100%;
     overflow: auto;
     flex: 1 1 auto;
     -webkit-overflow-scrolling: touch;
