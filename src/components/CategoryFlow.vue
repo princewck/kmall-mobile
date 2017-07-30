@@ -33,7 +33,8 @@ export default {
   computed: {
     categories: function () {
       if (!this.groups.length) return [];
-      return this.groups[this.checkedIndex]['categories'];
+      let categories = this.groups[this.checkedIndex]['categories'] || [];
+      return categories.sort((c1, c2) => (c1.sort - c2.sort));
     }
   },
   mounted: function () {
