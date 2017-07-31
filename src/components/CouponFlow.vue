@@ -15,8 +15,8 @@
     </div>
     <load-more v-if="!noMorePages && !emptyList" tip="加载中..."></load-more>
     <load-more v-if="requesting" tip="加载中..."></load-more>
-    <load-more v-if="noMorePages && !requesting" :show-loading="false" tip="没有更多啦."></load-more>
-    <load-more v-if="emptyList && !requesting" :show-loading="false" tip="oh~ 老板好像忘记进货了."></load-more>
+    <load-more v-if="!emptyList && noMorePages && !requesting" :show-loading="false" tip="没有更多啦."></load-more>
+    <load-more v-if="emptyList && !requesting" :show-loading="false" tip="未查到相关优惠券，换关键词搜搜看."></load-more>
   </div>
 </template>
 

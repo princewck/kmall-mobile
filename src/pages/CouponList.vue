@@ -43,7 +43,11 @@ export default {
       fetch(`/api/web/nice_coupons/${this.kw || 'all'}/${this.page+1}`)
         .then(res => res.json())
         .then(({results}) => {
-          vm.$set(this, 'list', vm.list.concat(results.tbk_coupon));
+          if (!results || !results.tbk_coupon) {
+            vm.$set(this, 'list', vm.list.concat([]));
+          } else {
+            vm.$set(this, 'list', vm.list.concat(results.tbk_coupon));
+          }
           vm.$set(this, 'page', vm.page+1);
           vm.$set(this, 'requesting', false);
         });

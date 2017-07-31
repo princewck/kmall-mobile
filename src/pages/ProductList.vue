@@ -87,7 +87,7 @@ export default {
         groupId: 0,
         kwd: ''
       };
-      categoryId && (params.categoryIds = [String(categoryId)]);
+      categoryId && categoryId !== 'all' && (params.categoryIds = [String(categoryId)]);
       groupId && (params.groupId = String(groupId));
       vm.$set(vm, 'requesting', true);
       fetch(`/api/web/products/query/p/${page}`, {
