@@ -3,7 +3,7 @@
     <div class="image-flow">
       <div class="image-flow-item-wrapper" v-for="(coupon, index) in data" :key="coupon.num_iid">
         <a @click="goDetail(coupon, $event)" class="image-flow-item touch-me">
-          <x-img v-square :default-src="loadingHolder" :src="coupon.pict_url" :offset="100" :container="container"></x-img>
+          <x-img v-square :default-src="loadingHolder" :src="thumb(coupon.pict_url)" :offset="100" :container="container"></x-img>
           <p class="image-description" v-text="coupon.title"></p>
           <p class="product-info">
             淘宝价：<del>¥ {{ prepPrice(coupon.zk_final_price) }} </del>
@@ -26,6 +26,7 @@
  * **/
 import { XImg, LoadMore } from 'vux';
 import loading from '../images/loading';
+import { thumb } from '../libs/utils';
 export default {
   name: 'couponFlow',
   components: { XImg, LoadMore },
@@ -70,6 +71,7 @@ export default {
     document.addEventListener('scroll', handler);
   },
   methods: {
+    thumb: thumb,
     goDetail: function (coupon, event) {
       var kw = encodeURIComponent(coupon.title);
       var id = coupon.num_iid;

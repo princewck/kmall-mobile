@@ -3,7 +3,7 @@
       <div class="image-flow">
         <div class="image-flow-item-wrapper" v-for="(image, index) in images" :key="image.id">
           <a @click="goDetail(image)" class="image-flow-item touch-me">
-            <x-img v-square :default-src="loadingHolder" :src="image.product_image" :offset="100" :container="container"></x-img>
+            <x-img v-square :default-src="loadingHolder" :src="thumb(image.product_image)" :offset="100" :container="container"></x-img>
             <p class="image-description" v-text="image.product_name"></p>
             <p class="price-field">¥ {{ image.real_price }}  <del>¥{{ image.price }}</del></p>
           </a>
@@ -19,6 +19,7 @@
 <script>
 import { XImg, LoadMore } from 'vux';
 import loading from '../images/loading';
+import { thumb } from '../libs/utils';
 export default {
   name: 'productFlow',
   components: {XImg, LoadMore},
@@ -73,6 +74,7 @@ export default {
     document.addEventListener('scroll', handler);
   },
   methods: {
+    thumb: thumb,
     goDetail: function (image) {
       if (this.samePage) {
         this.$emit('onClick', image.id);
