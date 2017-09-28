@@ -16,7 +16,7 @@
         <div v-if="!loading" class="qiang-list" id="qiang_body">
           <div class="qiang-item" v-for="item in products" :key="item.num_iid">
             <div class="qiang-item-image">
-              <x-img :src="item.pic_url" :offset="100" container="#qiang_body"></x-img>
+              <img v-lazy="thumb(item.pic_url)"  />
             </div>
             <div class="qiang-item-detail">
               <p class="title" v-text="item.title"></p>
@@ -49,15 +49,15 @@
 /**
  *淘抢购
  **/
-import { XHeader, LoadMore, XImg } from 'vux';
+import { XHeader, LoadMore } from 'vux';
+import { thumb } from '../libs/utils';
 import moment from 'moment';
 import '../libs/moment.locale';
 export default {
   name: 'rushPurchasing',
   components: {
     XHeader,
-    LoadMore,
-    XImg
+    LoadMore
   },
   data() {
     var day = {
@@ -133,6 +133,7 @@ export default {
     this.scrollIntoView();
   },
   methods: {
+    thumb,
     goBack() {
       this.$router.push('/');
     },

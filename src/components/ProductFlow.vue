@@ -3,7 +3,7 @@
       <div class="image-flow">
         <div class="image-flow-item-wrapper" v-for="(image, index) in images" :key="image.id">
           <a @click="goDetail(image)" class="image-flow-item touch-me">
-            <x-img v-square :default-src="loadingHolder" :src="thumb(image.product_image)" :offset="100" :container="container"></x-img>
+            <img v-lazy="thumb(image.product_image)" />
             <p class="image-description" v-text="image.product_name"></p>
             <p class="price-field">¥ {{ image.real_price }}  <del>¥{{ image.price }}</del></p>
           </a>
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { XImg, LoadMore } from 'vux';
+import { LoadMore } from 'vux';
 import loading from '../images/loading';
 import { thumb } from '../libs/utils';
 export default {
   name: 'productFlow',
-  components: {XImg, LoadMore},
+  components: {LoadMore},
   props: ['data', 'requesting', 'samePage'],
   data() {
     let vm = this;

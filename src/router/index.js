@@ -13,7 +13,7 @@ export default new Router({
       return { x: 0, y: 0 }
     }
   },
-  routes: [
+  routes:[
     {
       path: '/',
       name: 'home',

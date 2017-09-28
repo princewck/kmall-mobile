@@ -9,7 +9,9 @@
           <div class="home-banner-container">
             <swiper class="home-banner" :aspect-ratio="300/800" :auto="true">
               <swiper-item class="swiper-item-img" v-for="(item, index) in imageList" :key="index">
-                <a :href="item.m_link" target="_blank"><img :src="item.image"></a>
+                <a :href="item.m_link" target="_blank">
+                  <img v-lazy="item.image">
+                </a>
               </swiper-item>
             </swiper>
           </div>
@@ -62,7 +64,6 @@ export default {
       groups: [],
       pList: { data: [], currentPage: 0 },
       showDrawer: false,
-      routeName: this.$route.name
     }
   },
   mounted: function () {
@@ -70,6 +71,11 @@ export default {
     self.fetchList();
     self.fetchBanners();
     self.fetchBlockGroups();
+  },
+  computed: {
+    routeName() {
+      return this.$route.name;
+    }
   },
   methods: {
     fetchBlockGroups() {

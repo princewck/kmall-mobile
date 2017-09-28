@@ -3,7 +3,7 @@
     <div class="image-flow">
       <div class="image-flow-item-wrapper" v-for="(coupon, index) in data" :key="coupon.num_iid">
         <a @click="goDetail(coupon, $event)" class="image-flow-item touch-me">
-          <x-img v-square :default-src="loadingHolder" :src="thumb(coupon.pict_url)" :offset="100" :container="container"></x-img>
+          <img v-lazy="thumb(coupon.pict_url)" />
           <p class="image-description" v-text="coupon.title"></p>
           <p class="product-info">
             淘宝价：<del>¥ {{ prepPrice(coupon.zk_final_price) }} </del>
@@ -24,12 +24,12 @@
 /**
  * 和ProductFlow的区别在于，这里无法获取页数信息，所以要多掉一次接口确认是否有更多数据，no-more-pages由父组建决定。
  * **/
-import { XImg, LoadMore } from 'vux';
+import { LoadMore } from 'vux';
 import loading from '../images/loading';
 import { thumb } from '../libs/utils';
 export default {
   name: 'couponFlow',
-  components: { XImg, LoadMore },
+  components: { LoadMore },
   props: ['data', 'requesting', 'noMorePages', 'kw'],
   data() {
     let vm = this;

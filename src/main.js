@@ -5,7 +5,14 @@ import App from './App'
 import router from './router'
 import store from './store'
 import  { AlertPlugin } from 'vux'
+import VueLazyload from 'vue-lazyload'
+import loading from './images/loading'
 Vue.use(AlertPlugin);
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  loading: loading,
+  attempt: 1
+});
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
