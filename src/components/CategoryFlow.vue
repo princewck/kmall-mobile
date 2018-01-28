@@ -64,7 +64,7 @@ export default {
       this.$set(this, 'checkedIndex', index);
     },
     getCategoryImage(category) {
-      return category.image || holder;
+      return this.https(category.image || holder);
     }
   }
 }

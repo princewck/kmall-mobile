@@ -16,7 +16,7 @@
         <div v-if="!loading" class="qiang-list" id="qiang_body">
           <div class="qiang-item" v-for="item in products" :key="item.num_iid">
             <div class="qiang-item-image">
-              <img v-lazy="thumb(item.pic_url)"  />
+              <img v-lazy="thumb(https(item.pic_url))"  />
             </div>
             <div class="qiang-item-detail">
               <p class="title" v-text="item.title"></p>

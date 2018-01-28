@@ -5,7 +5,7 @@
       <div class="wechat-hint" v-if="isWechat">
         <span>您使用的是微信浏览器，由于微信屏蔽了淘宝链接，为了更好的浏览和购物体验，请点击右上角菜单选择在手机浏览器或者支付宝中打开以支持唤起app购买。</span>
       </div>
-      <img :src="data.pict_url">
+      <img :src="https(data.pict_url)">
       <p class="price-row">
         <span class="real-price" v-text="prehandlePrice(data.zk_final_price - getCouponPrice(data.coupon_info))"></span>
         <span v-if="data.coupon_info">(使用本网内部优惠券后)</span>

@@ -10,7 +10,7 @@
             <swiper class="home-banner" :aspect-ratio="300/800" :auto="true">
               <swiper-item class="swiper-item-img" v-for="(item, index) in imageList" :key="index">
                 <a :href="item.m_link" target="_blank">
-                  <img v-lazy="item.image">
+                  <img v-lazy="https(item.image)">
                 </a>
               </swiper-item>
             </swiper>

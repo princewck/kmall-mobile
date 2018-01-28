@@ -4,7 +4,7 @@
     <div class="block-group-content">
       <a class="block-group-item" :href="item.m_link || '#'" v-for="(item, index) in items" :key="index">
         <label v-text="item.title"></label>
-        <img :src="item.image" class="touch-me" alt="item.title">
+        <img :src="https(item.image)" class="touch-me" alt="item.title">
         <p v-text="item.description"></p>
       </a>
     </div>
@@ -18,7 +18,7 @@ export default {
   computed: {
     items: function() { return this.data.list },
     name: function() { return this.data.name }
-  }
+  },
 }
 </script>
 

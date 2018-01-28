@@ -1,7 +1,7 @@
 <template>
   <div class="nav-button-group">
     <div class="nav-button-item touch-me" @click="prehandlClick(item.onClick)"   v-for="item in buttons" v-bind:key="item.id">
-      <img :src="item.img">
+      <img :src="https(item.img)">
       <span v-text="item.title"></span>
     </div>
   </div>

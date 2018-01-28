@@ -4,7 +4,7 @@
       品牌列表</x-header>
     <grid>
       <grid-item :label="brand.name" :link="`/brand/collection/${brand.id}`" v-for="(brand, index) in brands" :key="brand.id">
-        <img slot="icon" :src="brand.$logo">
+        <img slot="icon" :src="https(brand.$logo)">
       </grid-item>
     </grid>
   </div>

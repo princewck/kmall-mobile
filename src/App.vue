@@ -8,7 +8,7 @@
 import 'fetch-polyfill2';
 import './directives';
 export default {
-  name: 'app'
+  name: 'app',
 }
 </script>
 

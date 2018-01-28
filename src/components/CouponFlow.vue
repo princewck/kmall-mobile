@@ -3,7 +3,7 @@
     <div class="image-flow">
       <div class="image-flow-item-wrapper" v-for="(coupon, index) in data" :key="coupon.num_iid">
         <a @click="goDetail(coupon, $event)" class="image-flow-item touch-me">
-          <img v-lazy="thumb(coupon.pict_url)" />
+          <img v-lazy="thumb(https(coupon.pict_url))" />
           <p class="image-description" v-text="coupon.title"></p>
           <p class="product-info">
             淘宝价：<del>¥ {{ prepPrice(coupon.zk_final_price) }} </del>

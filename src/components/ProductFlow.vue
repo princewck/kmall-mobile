@@ -3,7 +3,7 @@
       <div class="image-flow">
         <div class="image-flow-item-wrapper" v-for="(image, index) in images" :key="image.id">
           <a @click="goDetail(image)" class="image-flow-item touch-me">
-            <img v-lazy="thumb(image.product_image)" />
+            <img v-lazy="thumb(https(image.product_image))" />
             <p class="image-description" v-text="image.product_name"></p>
             <p class="price-field">¥ {{ image.real_price }}  <del>¥{{ image.price }}</del></p>
           </a>
